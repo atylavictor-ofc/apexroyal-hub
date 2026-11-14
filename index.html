@@ -200,7 +200,7 @@ function draw(){
   h+="<div class=c style='margin-top:14px'><div class=nm>Ainda não votaram</div><div class=m>"+(nv.length?nv.map(function(p){return p.n}).join(", "):"Todos já votaram.")+"</div></div>";
  }
  if(tab=="Composição"){
- var ad=isAdmin(),cs=comps[cm]||[],vt=players.filter(function(p){return votes[p.id]&&votes[p.id][cm]!==undefined});
+ var ad=isAdmin(),cs=comps[cm]||[],vtc=players.filter(function(p){return votes[p.id]&&votes[p.id][cm]!==undefined});
  var pa={},aa={},w=[],rows="";
  cs.forEach(function(s){if(!s)return;if(s.p){if(pa[s.p])w.push(P(s.p).n+" aparece duas vezes");pa[s.p]=1}if(s.a){if(aa[s.a])w.push(s.a+" está repetido");aa[s.a]=1}});
  for(var i=0;i<6;i++){var s=cs[i]||{};
@@ -210,7 +210,7 @@ function draw(){
  }
  h="<h2>Composição</h2><p class=sub>"+(ad?"Escolha quem joga com cada agente no mapa votado. O ✓ marca quem votou nesse jogo.":"Escalação definida pelo comando.")+"</p><div class=row2><select onchange=cmap(this.value)>"+opts.map(function(x){return "<option value="+x.id+(x.id==cm?" selected":"")+">"+x.map+" · "+x.d+" · "+x.h+"</option>"}).join("")+"</select>"+(ad?"<button onclick=sug()>Sugerir pela votação</button>":"")+"</div><div class='c tw'><table><tr><th>#</th><th>Jogador</th><th>Agente</th></tr>"+rows+"</table></div>";
  if(w.length)h+="<div class=err style='text-align:left;margin-top:12px'>Atenção: "+w.join("; ")+".</div>";
- h+="<div class=c style='margin-top:14px'><div class=nm>Votaram neste mapa</div><div class=m>"+(vt.length?vt.map(function(p){return p.n+" ("+votes[p.id][cm]+")"}).join(", "):"Ninguém votou ainda.")+"</div></div>";
+ h+="<div class=c style='margin-top:14px'><div class=nm>Votaram neste mapa</div><div class=m>"+(vtc.length?vtc.map(function(p){return p.n+" ("+votes[p.id][cm]+")"}).join(", "):"Ninguém votou ainda.")+"</div></div>";
 }
 var ad2=isAdmin();
 if(tab=="Enquete"){
