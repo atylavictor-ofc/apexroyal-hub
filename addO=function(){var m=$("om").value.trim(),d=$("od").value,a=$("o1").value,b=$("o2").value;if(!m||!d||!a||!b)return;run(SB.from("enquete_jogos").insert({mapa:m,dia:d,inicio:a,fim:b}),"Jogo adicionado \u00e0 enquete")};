@@ -352,7 +352,7 @@ addB=function(){var m=$("bm").value.trim(),t=$("bt").value.trim(),x=$("bx").valu
 delB=function(i){run(SB.from("playbook").delete().eq("id",D.book[i].id),"Estrat\u00e9gia removida");return false};
 addH=function(){var d=$("hd").value,m=$("hm").value.trim();if(!d||!m||$("ha").value===""||$("hb").value==="")return;run(SB.from("historico").insert({dia:d,mapa:m,adversario:$("hv").value.trim()||null,nos:+$("ha").value,eles:+$("hb").value}),"Partida registrada")};
 delH=function(i){run(SB.from("historico").delete().eq("id",D.hist[i].id),"Partida removida");return false};
-addO=function(){var m=$("om").value.trim(),d=$("od").value,a=$("o1").value,b=$("o2").value;if(!m||!d||!a||!b)return;run(SB.from("enquete_jogos").insert({mapa:m,dia:d,inicio:a,fim:b}),"Jogo adicionado \u00e0 enquete")};
+addO=function(){var m=$("om").value.trim(),d=$("od").value,a=$("o1").value,b=$("o2").value;if(!m||!d||!a||!b){toast("Preencha mapa, data e horários","bad");return}run(SB.from("enquete_jogos").insert({mapa:m,dia:d,inicio:a,fim:b}),"Enquete criada: "+m)};
 delO=function(i){run(SB.from("enquete_jogos").delete().eq("id",opts[i].id),"Jogo removido da enquete");return false};
 newWk=function(){var b=$("nwb");if(!b.dataset.c){b.dataset.c=1;b.textContent="Clique de novo para confirmar";setTimeout(function(){b.dataset.c="";b.textContent="Nova semana (apaga jogos e votos)"},4000);return}run(SB.from("enquete_jogos").delete().neq("id","00000000-0000-0000-0000-000000000000"),"Nova semana iniciada")};
 setR=function(){var m=+$("rm").value;if(!m)return;run(SB.from("ranking").update({divisao:$("rd").value.trim()||"-",pontos:+$("rp").value||0,meta:m}).eq("id",1),"Ranking atualizado")};
